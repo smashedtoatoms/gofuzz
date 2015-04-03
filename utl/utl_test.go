@@ -19,15 +19,6 @@ func TestDeDuplicate(t *testing.T) {
 	}
 }
 
-func ExampleDeDuplicate(t *testing.T) {
-	DeDuplicate("buzz")
-	// Output: buz
-}
-func ExampleDeDuplicate_2(t *testing.T) {
-	DeDuplicate("accept")
-	// Output: accept
-}
-
 func TestIsAlphabetic(t *testing.T) {
 	if IsAlphabetic("abc3") != false {
 		t.Errorf("Fauled to determine that abc3 is not alphabetic.")
@@ -37,24 +28,10 @@ func TestIsAlphabetic(t *testing.T) {
 	}
 }
 
-func ExampleIsAlphabetic(t *testing.T) {
-	IsAlphabetic("abc")
-	// Output: true
-}
-func ExampleIsAlphabetic_2(t *testing.T) {
-	IsAlphabetic("abc1")
-	// Output: false
-}
-
 func TestIntersect(t *testing.T) {
 	if Intersect("context", "contentcontent") != "contet" {
 		t.Errorf("Failed to find the intersect of context and contentcontent.")
 	}
-}
-
-func ExampleIntersect(t *testing.T) {
-	Intersect("context", "contentcontent")
-	// Output: "contet"
 }
 
 func TestTokenize(t *testing.T) {
@@ -77,10 +54,34 @@ func TestTokenize(t *testing.T) {
 	}
 }
 
+/* Examples */
+
+func ExampleDeDuplicate(t *testing.T) {
+	DeDuplicate("buzz")
+	// Output: buz
+}
+func ExampleDeDuplicate_2(t *testing.T) {
+	DeDuplicate("accept")
+	// Output: accept
+}
+func ExampleIsAlphabetic(t *testing.T) {
+	IsAlphabetic("abc")
+	// Output: true
+}
+func ExampleIsAlphabetic_2(t *testing.T) {
+	IsAlphabetic("abc1")
+	// Output: false
+}
+func ExampleIntersect(t *testing.T) {
+	Intersect("context", "contentcontent")
+	// Output: "contet"
+}
 func ExampleTokenize(t *testing.T) {
 	Tokenize("abcd", 2)
 	// Output: []string{"ab", "bc", "cd"}]
 }
+
+/* Helper Functions */
 
 // Compares string slices.
 func stringArrayNotEqual(a []string, b []string) bool {
