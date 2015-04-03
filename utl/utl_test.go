@@ -19,6 +19,15 @@ func TestDeDuplicate(t *testing.T) {
 	}
 }
 
+func ExampleDeDuplicate(t *testing.T) {
+	DeDuplicate("buzz")
+	// Output: buz
+}
+func ExampleDeDuplicate_2(t *testing.T) {
+	DeDuplicate("accept")
+	// Output: accept
+}
+
 func TestIsAlphabetic(t *testing.T) {
 	if IsAlphabetic("abc3") != false {
 		t.Errorf("Fauled to determine that abc3 is not alphabetic.")
@@ -26,6 +35,15 @@ func TestIsAlphabetic(t *testing.T) {
 	if IsAlphabetic("abc") != true {
 		t.Errorf("Fauled to determine that abc is alphabetic.")
 	}
+}
+
+func ExampleIsAlphabetic(t *testing.T) {
+	IsAlphabetic("abc")
+	// Output: true
+}
+func ExampleIsAlphabetic_2(t *testing.T) {
+	IsAlphabetic("abc1")
+	// Output: false
 }
 
 func TestIntersect(t *testing.T) {
@@ -52,6 +70,11 @@ func TestTokenize(t *testing.T) {
 	if stringArrayNotEqual(Tokenize("abcdefghijklmnopqrstuvwxyz", 3), token) {
 		t.Errorf("Failed to tokenize string by ngram 3.")
 	}
+}
+
+func ExampleTokenize(t *testing.T) {
+	Tokenize("abcd", 2)
+	// Output: []string{"ab", "bc", "cd"}]
 }
 
 // Compares string slices.
