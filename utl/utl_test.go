@@ -12,6 +12,9 @@ func TestDeDuplicate(t *testing.T) {
 	if DeDuplicate("c") != "c" {
 		t.Errorf("DeDuplicate fails to deduplicate the single letter c.")
 	}
+	if DeDuplicate("cool") != "col" {
+		t.Errorf("DeDuplicate fails to deduplicate the word 'cool'.")
+	}
 }
 func ExampleDeDuplicate() {
 	result := DeDuplicate("buzz")

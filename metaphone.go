@@ -3,12 +3,14 @@ package gofuzz
 import (
 	"errors"
 	"github.com/smashedtoatoms/gofuzz/utl"
-	"log"
-	"strconv"
 	"strings"
 )
 
 // Metaphone returns the metaphone phonetic version of the provided string.
+//
+// Note: This is one of the first things I wrote in go.  It could use slices of
+// runes and generate a lot less garbage.  If I get time, I'll come back and
+// rewrite it that way.
 func Metaphone(s string) (string, error) {
 	if utl.Size(s) == 0 || !utl.IsAlphabetic(s) {
 		return "", errors.New("String is empty or non-alphabetic.")
@@ -21,8 +23,22 @@ func Metaphone(s string) (string, error) {
 
 // MetaphoneMetric compares two strings and returns a boolean of whether they
 // match or not.
-func MetaphoneMetric(s1 string, s2 string) bool {
-	return false
+func MetaphoneMetric(s1 string, s2 string) (bool, error) {
+	s1Size := utl.Size(s1)
+	s2Size := utl.Size(s1)
+	s1IsAlphabetic := utl.IsAlphabetic(s1)
+	s2IsAlphabetic := utl.IsAlphabetic(s2)
+	switch s1Size == 0 || !s1IsAlphabetic || s2Size == 0 || !s2IsAlphabetic {
+	case false:
+		phonetic1, err := Metaphone(s1)
+		phonetic2, err := Metaphone(s2)
+		if err != nil {
+			return false, err
+		}
+		return phonetic1 == phonetic2, nil
+	default:
+		return false, errors.New("Unable to Metaphone compare the two values.")
+	}
 }
 
 /* Helper functions */
@@ -118,7 +134,7 @@ func transcode(s string) string {
 			rFirst := utl.FirstLetter(remainder)
 			rFirstInVowels := utl.Contains(vowels, rFirst)
 			pSecondToLast, _, _ := utl.GetLetter(processed, utl.Size(processed)-2)
-			if (pSize >= 1 && pLastInVowels && rSize == 0 || rFirstInVowels) ||
+			if (pSize >= 1 && pLastInVowels && (rSize == 0 || rFirstInVowels)) ||
 				pSize >= 2 && pLast == "h" && pSecondToLast == "t" ||
 				pSecondToLast == "g" {
 				shift(1, "")

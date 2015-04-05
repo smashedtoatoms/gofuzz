@@ -15,7 +15,7 @@ func DeDuplicate(s string) string {
 		return s
 	}
 	newVal := string(s[0])
-	for _, char := range s {
+	for _, char := range s[1:] {
 		newValLastLetter, _ := utf8.DecodeLastRuneInString(newVal)
 		c, _ := utf8.DecodeLastRuneInString("c")
 		if char == c || char != newValLastLetter {
