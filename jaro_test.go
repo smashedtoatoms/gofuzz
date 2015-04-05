@@ -5,7 +5,9 @@ import (
 )
 
 func TestJaro(t *testing.T) {
-	if Jaro("", "") != 0.0 {
+	error := "Unable to calculate Jaro against empty string."
+	_, err1 := Jaro("", "")
+	if err1.Error() != error {
 		t.Errorf("Jaro Test Failed.")
 	}
 }

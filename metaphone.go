@@ -65,9 +65,10 @@ func transcode(s string) string {
 		switch current {
 		case "a", "e", "i", "o", "u":
 			pSize := utl.Size(processed)
-			if pSize == 0 {
+			switch {
+			case pSize == 0:
 				shift(1, current)
-			} else {
+			default:
 				shift(1, "")
 			}
 		case "f", "j", "l", "m", "n", "r":
@@ -76,9 +77,10 @@ func transcode(s string) string {
 			pSize := utl.Size(processed)
 			pLast := utl.LastLetter(processed)
 			rSize := utl.Size(remainder)
-			if pSize >= 1 && pLast == "m" && rSize == 0 {
+			switch {
+			case pSize >= 1 && pLast == "m" && rSize == 0:
 				shift(1, "")
-			} else {
+			default:
 				shift(1, "b")
 			}
 		case "c":
@@ -88,19 +90,20 @@ func transcode(s string) string {
 			pLast := utl.LastLetter(processed)
 			rSecond, _, _ := utl.GetLetter(remainder, 1)
 			rHasIEY := utl.Contains(iey, rFirst)
-			if rSize >= 1 && rFirst == "h" && pSize >= 1 && pLast == "s" {
+			switch {
+			case rSize >= 1 && rFirst == "h" && pSize >= 1 && pLast == "s":
 				shift(1, "k")
-			} else if rSize >= 2 && rFirst == "i" && rSecond == "a" {
+			case rSize >= 2 && rFirst == "i" && rSecond == "a":
 				shift(3, "x")
-			} else if rSize >= 1 && rFirst == "h" {
+			case rSize >= 1 && rFirst == "h":
 				shift(2, "x")
-			} else if pSize >= 1 && rSize >= 1 && pLast == "s" && rFirst == "h" {
+			case pSize >= 1 && rSize >= 1 && pLast == "s" && rFirst == "h":
 				shift(2, "x")
-			} else if pSize >= 1 && rSize >= 1 && pLast == "s" && rHasIEY {
+			case pSize >= 1 && rSize >= 1 && pLast == "s" && rHasIEY:
 				shift(1, "")
-			} else if rSize >= 1 && rHasIEY {
+			case rSize >= 1 && rHasIEY:
 				shift(1, "s")
-			} else {
+			default:
 				shift(1, "k")
 			}
 		case "d":
@@ -108,9 +111,10 @@ func transcode(s string) string {
 			rFirst := utl.FirstLetter(remainder)
 			rSecond, _, _ := utl.GetLetter(remainder, 1)
 			rSecondHasIEY := utl.Contains(iey, rSecond)
-			if rSize >= 2 && rFirst == "g" && rSecondHasIEY {
+			switch {
+			case rSize >= 2 && rFirst == "g" && rSecondHasIEY:
 				shift(1, "j")
-			} else {
+			default:
 				shift(1, "t")
 			}
 		case "g":
@@ -118,12 +122,13 @@ func transcode(s string) string {
 			rFirst := utl.FirstLetter(remainder)
 			rThird, _, _ := utl.GetLetter(remainder, 2)
 			rFirstHasIEY := utl.Contains(iey, rFirst)
-			if (rSize > 1 && rFirst == "h") || (rSize == 1 && rFirst == "n") ||
-				(rSize == 3 && rFirst == "n" && rThird == "d") {
+			switch {
+			case (rSize > 1 && rFirst == "h") || (rSize == 1 && rFirst == "n") ||
+				(rSize == 3 && rFirst == "n" && rThird == "d"):
 				shift(1, "")
-			} else if rSize >= 1 && rFirstHasIEY {
+			case rSize >= 1 && rFirstHasIEY:
 				shift(2, "j")
-			} else {
+			default:
 				shift(1, "k")
 			}
 		case "h":
@@ -134,27 +139,30 @@ func transcode(s string) string {
 			rFirst := utl.FirstLetter(remainder)
 			rFirstInVowels := utl.Contains(vowels, rFirst)
 			pSecondToLast, _, _ := utl.GetLetter(processed, utl.Size(processed)-2)
-			if (pSize >= 1 && pLastInVowels && (rSize == 0 || rFirstInVowels)) ||
+			switch {
+			case (pSize >= 1 && pLastInVowels && (rSize == 0 || rFirstInVowels)) ||
 				pSize >= 2 && pLast == "h" && pSecondToLast == "t" ||
-				pSecondToLast == "g" {
+				pSecondToLast == "g":
 				shift(1, "")
-			} else {
+			default:
 				shift(1, "h")
 			}
 		case "k":
 			pSize := utl.Size(processed)
 			pLast := utl.LastLetter(processed)
-			if pSize >= 1 && pLast == "c" {
+			switch {
+			case pSize >= 1 && pLast == "c":
 				shift(1, "")
-			} else {
+			default:
 				shift(1, "k")
 			}
 		case "p":
 			rSize := utl.Size(remainder)
 			rFirst := utl.FirstLetter(remainder)
-			if rSize >= 1 && rFirst == "h" {
+			switch {
+			case rSize >= 1 && rFirst == "h":
 				shift(3, "f")
-			} else {
+			default:
 				shift(1, "p")
 			}
 		case "q":
@@ -164,11 +172,12 @@ func transcode(s string) string {
 			rFirst := utl.FirstLetter(remainder)
 			rSecond, _, _ := utl.GetLetter(remainder, 1)
 			rSecondInAo := utl.Contains([]string{"a", "o"}, rSecond)
-			if rSize >= 2 && rFirst == "i" && rSecondInAo {
+			switch {
+			case rSize >= 2 && rFirst == "i" && rSecondInAo:
 				shift(3, "x")
-			} else if rSize >= 1 && rFirst == "h" {
+			case rSize >= 1 && rFirst == "h":
 				shift(2, "x")
-			} else {
+			default:
 				shift(1, "s")
 			}
 		case "t":
@@ -176,13 +185,14 @@ func transcode(s string) string {
 			rFirst := utl.FirstLetter(remainder)
 			rSecond, _, _ := utl.GetLetter(remainder, 1)
 			rSecondInAo := utl.Contains([]string{"a", "o"}, rSecond)
-			if rSize >= 2 && rFirst == "i" && rSecondInAo {
+			switch {
+			case rSize >= 2 && rFirst == "i" && rSecondInAo:
 				shift(3, "x")
-			} else if rSize >= 1 && rFirst == "h" {
+			case rSize >= 1 && rFirst == "h":
 				shift(2, "0")
-			} else if rSize >= 2 && rFirst == "c" && rSecond == "h" {
+			case rSize >= 2 && rFirst == "c" && rSecond == "h":
 				shift(1, "")
-			} else {
+			default:
 				shift(1, "t")
 			}
 		case "v":
@@ -191,9 +201,10 @@ func transcode(s string) string {
 			rSize := utl.Size(remainder)
 			rFirst := utl.FirstLetter(remainder)
 			rFirstInVowels := utl.Contains(vowels, rFirst)
-			if rSize == 0 || !rFirstInVowels {
+			switch {
+			case rSize == 0 || !rFirstInVowels:
 				shift(1, "")
-			} else {
+			default:
 				shift(1, current)
 			}
 		case "x":
