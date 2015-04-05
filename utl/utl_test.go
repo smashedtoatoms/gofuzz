@@ -1,6 +1,7 @@
 package utl
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -11,12 +12,16 @@ func TestDeDuplicate(t *testing.T) {
 	if DeDuplicate("c") != "c" {
 		t.Errorf("DeDuplicate fails to deduplicate the single letter c.")
 	}
-	if DeDuplicate("buzz") != "buz" {
-		t.Errorf("DeDuplicate fails to deduplicate the letter z from buzz.")
-	}
-	if DeDuplicate("accept") != "accept" {
-		t.Errorf("DeDuplicate failed to not deduplicate the letter c from accept.")
-	}
+}
+func ExampleDeDuplicate() {
+	result := DeDuplicate("buzz")
+	fmt.Print(result)
+	// Output: buz
+}
+func ExampleDeDuplicate_2() {
+	result := DeDuplicate("accept")
+	fmt.Print(result)
+	// Output: accept
 }
 
 func TestIsAlphabetic(t *testing.T) {
@@ -27,11 +32,21 @@ func TestIsAlphabetic(t *testing.T) {
 		t.Errorf("Fauled to determine that abc is alphabetic.")
 	}
 }
+func ExampleIsAlphabetic() {
+	result := IsAlphabetic("abc")
+	fmt.Print(result)
+	// Output: true
+}
+func ExampleIsAlphabetic_2() {
+	result := IsAlphabetic("abc1")
+	fmt.Print(result)
+	// Output: false
+}
 
-func TestIntersect(t *testing.T) {
-	if Intersect("context", "contentcontent") != "contet" {
-		t.Errorf("Failed to find the intersect of context and contentcontent.")
-	}
+func ExampleIntersect() {
+	result := Intersect("context", "contentcontent")
+	fmt.Print(result)
+	// Output: contet
 }
 
 func TestTokenize(t *testing.T) {
@@ -53,32 +68,101 @@ func TestTokenize(t *testing.T) {
 		t.Errorf("Failed to tokenize string by ngram 3.")
 	}
 }
-
-/* Examples */
-
-func ExampleDeDuplicate(t *testing.T) {
-	DeDuplicate("buzz")
-	// Output: buz
+func ExampleTokenize() {
+	result := Tokenize("abcd", 2)
+	fmt.Print(result)
+	// Output: [ab bc cd]
 }
-func ExampleDeDuplicate_2(t *testing.T) {
-	DeDuplicate("accept")
-	// Output: accept
+
+func TestGetLetter(t *testing.T) {
+	e := "String index out of range."
+	l1, w1, err := GetLetter("bob世jerry", 3)
+	if l1 != "世" || w1 != "jerry" || err != nil {
+		t.Errorf("Failed to get letter and word correctly.")
+	}
+	l2, w2, err := GetLetter("a", 1)
+	if l2 != "a" || w2 != "" || err.Error() != e {
+		t.Errorf("Failed to return correct letters when range was too large.")
+	}
+	l3, w3, err := GetLetter("", 0)
+	if l3 != "" || w3 != "" || err.Error() != e {
+		t.Errorf("Failed to return correct letters when string was empty.")
+	}
 }
-func ExampleIsAlphabetic(t *testing.T) {
-	IsAlphabetic("abc")
+func ExampleTestGetLetter() {
+	firstLetter, restOfWord, err := GetLetter("bob", 0)
+	if err != nil {
+		fmt.Print("an unexpected error was encountered")
+	}
+	fmt.Print(firstLetter + " : " + restOfWord)
+	// Output: b : ob
+}
+
+func ExampleContains() {
+	success := Contains([]string{"a", "b", "jerry"}, "jerry")
+	fmt.Print(success)
 	// Output: true
 }
-func ExampleIsAlphabetic_2(t *testing.T) {
-	IsAlphabetic("abc1")
-	// Output: false
+
+func TestSplitAt(t *testing.T) {
+	s1, s2, err := SplitAt("toolong", 7)
+	e := "String index out of range."
+	if s1 != "toolong" || s2 != "" || err.Error() != e {
+		t.Errorf("Failed to return correct split strings when range was too large.")
+	}
 }
-func ExampleIntersect(t *testing.T) {
-	Intersect("context", "contentcontent")
-	// Output: "contet"
+func ExampleSplitAt() {
+	s1, s2, err := SplitAt("splitme", 5)
+	if err != nil {
+		fmt.Print("an unexpected error was encountered")
+	}
+	fmt.Print(s1 + " : " + s2)
+	// Output: split : me
 }
-func ExampleTokenize(t *testing.T) {
-	Tokenize("abcd", 2)
-	// Output: []string{"ab", "bc", "cd"}]
+
+func TestLastLetter(t *testing.T) {
+	if LastLetter("jason") != "n" {
+		t.Errorf("failed to get last letter from the word 'Jason'.")
+	}
+	if LastLetter("j") != "j" {
+		t.Errorf("failed to get last letter from the word 'j'.")
+	}
+	if LastLetter("") != "" {
+		t.Errorf("failed to get last letter from empty string.")
+	}
+}
+func ExampleLastLetter() {
+	lastLetter := LastLetter("these three words")
+	fmt.Print(lastLetter)
+	// Output: s
+}
+
+func TestFirstLetter(t *testing.T) {
+	if FirstLetter("jason") != "j" {
+		t.Errorf("failed to get last letter from the word 'Jason'.")
+	}
+	if FirstLetter("j") != "j" {
+		t.Errorf("failed to get last letter from the word 'j'.")
+	}
+	if FirstLetter("") != "" {
+		t.Errorf("failed to get last letter from empty string.")
+	}
+}
+func ExampleFirstLetter() {
+	firstLetter := FirstLetter("these three words")
+	fmt.Print(firstLetter)
+	// Output: t
+}
+
+func TestSize(t *testing.T) {
+	if Size("") != 0 {
+		t.Errorf("failed to determine size of empty string.")
+	}
+}
+func ExampleSize() {
+	stringSize := Size("this string")
+	fmt.Print(stringSize)
+	// Output: 11
 }
 
 /* Helper Functions */
