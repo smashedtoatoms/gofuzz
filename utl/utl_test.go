@@ -168,6 +168,34 @@ func ExampleSize() {
 	// Output: 11
 }
 
+func TestMaxInt(t *testing.T) {
+	if MaxInt([]int{100, 2, -3}) != 100 {
+		t.Errorf("MaxInt failed to detect that the largest int was 100.")
+	}
+	if MaxInt([]int{-100, 2, -3}) != 2 {
+		t.Errorf("MaxInt failed to detect that the largest int was 2.")
+	}
+}
+func ExampleMaxInt() {
+	maxInt := MaxInt([]int{1, 2, 3})
+	fmt.Print(maxInt)
+	// Output: 3
+}
+
+func TestMinInt(t *testing.T) {
+	if MinInt([]int{100, 2, -3}) != -3 {
+		t.Errorf("MinInt failed to detect that the smallest int was -3.")
+	}
+	if MinInt([]int{-100, 2, -3}) != -100 {
+		t.Errorf("MinInt failed to detect that the smallest int was -100.")
+	}
+}
+func ExampleMinInt() {
+	minInt := MinInt([]int{1, 2, 3})
+	fmt.Print(minInt)
+	// Output: 1
+}
+
 /* Helper Functions */
 
 // Compares string slices.

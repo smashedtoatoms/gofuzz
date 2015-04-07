@@ -115,3 +115,25 @@ func Contains(vals []string, val string) bool {
 func Size(s string) int {
 	return utf8.RuneCountInString(s)
 }
+
+// MaxInt finds the largest integer in a slice of ints and returns it.
+func MaxInt(ints []int) int {
+	biggest := ints[0]
+	for _, i := range ints {
+		if i > biggest {
+			biggest = i
+		}
+	}
+	return biggest
+}
+
+// MinInt finds the smallest integer in a slice of ints and returns it.
+func MinInt(ints []int) int {
+	smallest := ints[0]
+	for _, i := range ints {
+		if i < smallest {
+			smallest = i
+		}
+	}
+	return smallest
+}
