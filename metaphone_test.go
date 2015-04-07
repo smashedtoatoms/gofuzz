@@ -1,6 +1,7 @@
 package gofuzz
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -55,6 +56,14 @@ func TestMetaphoneMetric(t *testing.T) {
 	if v6 != false {
 		t.Errorf("MetaphoneMetric didn't compare merci and burpy.")
 	}
+}
+func ExampleMetaphoneMetric() {
+	result, err := MetaphoneMetric("Colorado", "Kolorado")
+	if err != nil {
+		fmt.Print("an unexpected error was encountered")
+	}
+	fmt.Print(result)
+	// Output: true
 }
 
 func TestMetaphone(t *testing.T) {
@@ -658,4 +667,12 @@ func TestMetaphone(t *testing.T) {
 		t.Errorf("Metaphone 'antidisestablishmentarianism' expected "+
 			"'anttsstblxmntrnsm' and got '%s'.", misc)
 	}
+}
+func ExampleMetaphone() {
+	result, err := Metaphone("Colorado")
+	if err != nil {
+		fmt.Print("an unexpected error was encountered")
+	}
+	fmt.Print(result)
+	// Output: klrt
 }

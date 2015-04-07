@@ -1,6 +1,7 @@
 package gofuzz
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -101,4 +102,12 @@ func TestJaro(t *testing.T) {
 	if t3 <= t4 {
 		t.Errorf("failed bool comparison 2")
 	}
+}
+func ExampleJaro() {
+	result, err := Jaro("bob", "bobby")
+	if err != nil {
+		fmt.Print("an unexpected error was encountered")
+	}
+	fmt.Print(result)
+	// Output: 0.75555557
 }
