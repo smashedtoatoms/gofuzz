@@ -7,13 +7,12 @@ import (
 
 func TestMetaphoneMetric(t *testing.T) {
 	errorMessage := "Unable to Metaphone compare the two values."
-	errorMessage2 := "String is empty or non-alphabetic."
 	_, e1 := MetaphoneMetric("", "")
 	if e1.Error() != errorMessage {
 		t.Errorf("MetaphoneMetric didn't compare emtpy strings.")
 	}
 	_, e2 := MetaphoneMetric("abc", "")
-	if e2.Error() != errorMessage2 {
+	if e2.Error() != errorMessage {
 		t.Errorf("MetaphoneMetric didn't compare emtpy string to letters.")
 	}
 	_, e3 := MetaphoneMetric("", "xys")
@@ -668,6 +667,7 @@ func TestMetaphone(t *testing.T) {
 			"'anttsstblxmntrnsm' and got '%s'.", misc)
 	}
 }
+
 func ExampleMetaphone() {
 	result, err := Metaphone("Colorado")
 	if err != nil {

@@ -7,37 +7,37 @@ import (
 
 // Jaro calculates the Jaro distance between two strings.
 func Jaro(s1 string, s2 string) (float32, error) {
-	s1Size := utl.Size(s1)
-	s2Size := utl.Size(s2)
+	chars1 := []rune(s1)
+	chars2 := []rune(s2)
 	switch {
-	case s1Size == 0 || s2Size == 0:
+	case len(chars1) == 0 || len(chars2) == 0:
 		return 0, errors.New("Unable to calculate Jaro against empty string.")
 	case s1 == s2:
 		return 1.0, nil
-	case s1Size > s2Size:
-		return match(s2, s1), nil
+	case len(chars1) > len(chars2):
+		return match(chars2, chars1), nil
 	default:
-		return match(s1, s2), nil
+		return match(chars1, chars2), nil
 	}
 	return 0.0, nil
 }
 
 /* Helper functions */
 
-func match(s1 string, s2 string) float32 {
-	max := utl.Size(s2) / 2
-	s1Size := utl.Size(s1)
-	s2Size := utl.Size(s2)
+func match(s1 []rune, s2 []rune) float32 {
+	max := len(s2) / 2
+	s1Size := len(s1)
+	s2Size := len(s2)
 	commons := 0
 	transpositions := 0
 	previous := -1
 	for i := 0; i < s1Size; i = i + 1 {
-		char1, _, _ := utl.GetLetter(s1, i)
+		char1 := s1[i]
 		from := utl.MaxInt([]int{0, i - max})
 		to := utl.MinInt([]int{s2Size, i + max})
 	SecondWordLoop:
 		for from < to {
-			char2, _, _ := utl.GetLetter(s2, from)
+			char2 := s2[from]
 			switch {
 			case char1 == char2 && previous != -1 && from < previous:
 				commons = commons + 1
