@@ -10,7 +10,7 @@ func TestJaro(t *testing.T) {
 	error := "Unable to calculate Jaro against empty string."
 	_, err1 := Jaro("", "")
 	if err1.Error() != error {
-		t.Errorf("Jara two empty strings failed, expected error.")
+		t.Errorf("Jaro two empty strings failed, expected error.")
 	}
 	_, err2 := Jaro("abc", "")
 	if err2.Error() != error {

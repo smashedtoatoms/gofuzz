@@ -36,19 +36,17 @@ func IsAlphabetic(s string) bool {
 	return !isAlphabetic
 }
 
-// Intersect finds the intersection of two strings.
-func Intersect(s1 string, s2 string) string {
-	short := []rune(s1)
-	long := []rune(s2)
-	if len(short) > len(long) {
-		temp := short
-		short = long
-		long = temp
+// Intersect finds the intersection of two char slices.
+func Intersect(s1 []string, s2 []string) []string {
+	if len(s1) > len(s2) {
+		temp := s1
+		s1 = s2
+		s2 = temp
 	}
-	intersect := make([]rune, len(short))
+	intersect := make([]string, len(s1))
 	intersectIndex := 0
-	for _, char1 := range short {
-		for _, char2 := range long {
+	for _, char1 := range s1 {
+		for _, char2 := range s2 {
 			switch {
 			case char1 == char2 && intersectIndex == 0:
 				intersect[0] = char1
@@ -59,19 +57,23 @@ func Intersect(s1 string, s2 string) string {
 			}
 		}
 	}
-	return string(intersect[0:intersectIndex])
+	return intersect[0:intersectIndex]
 }
 
 // Tokenize ngram tokenizes the provided string in groups of n.
-func Tokenize(s string, n int) []string {
-	chars := []rune(s)
-	count := len(chars)
+func Tokenize(s1 []string, n int) []string {
+	count := len(s1)
 	if n <= 0 || count < n {
 		return make([]string, 0)
 	}
-	tokenized := make([]string, len(chars)-(n-1))
+	tokenized := make([]string, len(s1)-(n-1))
 	for i, j := 0, n; j <= count; i, j = i+1, j+1 {
-		tokenized[i] = string(chars[i : i+(n)])
+		newString := ""
+		strings := s1[i : i+(n)]
+		for _, s := range strings {
+			newString = newString + s
+		}
+		tokenized[i] = newString
 	}
 	return tokenized
 }

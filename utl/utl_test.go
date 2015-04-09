@@ -47,32 +47,30 @@ func ExampleIsAlphabetic_2() {
 }
 
 func ExampleIntersect() {
-	result := Intersect("context", "contentcontent")
+	characterList1 := []string{"c", "o", "n", "t", "e", "x", "t"}
+	characterList2 := []string{"c", "o", "n", "t", "e", "n", "t", "c", "o", "n",
+		"t", "e", "n", "t"}
+	result := Intersect(characterList1, characterList2)
 	fmt.Print(result)
-	// Output: contet
+	// Output: [c o n t e t]
 }
 
 func TestTokenize(t *testing.T) {
-	token := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-		"l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
-	if stringsNotEqual(Tokenize("abcdefghijklmnopqrstuvwxyz", 1), token) {
+	token := []string{"a", "b", "c", "d"}
+	if stringsNotEqual(Tokenize([]string{"a", "b", "c", "d"}, 1), token) {
 		t.Errorf("Failed to tokenize string by ngram 1.")
 	}
-	token = []string{"ab", "bc", "cd", "de", "ef", "fg", "gh", "hi", "ij",
-		"jk", "kl", "lm", "mn", "no", "op", "pq", "qr", "rs", "st", "tu", "uv",
-		"vw", "wx", "xy", "yz"}
-	if stringsNotEqual(Tokenize("abcdefghijklmnopqrstuvwxyz", 2), token) {
+	token = []string{"ab", "bc", "cd"}
+	if stringsNotEqual(Tokenize([]string{"a", "b", "c", "d"}, 2), token) {
 		t.Errorf("Failed to tokenize string by ngram 2.")
 	}
-	token = []string{"abc", "bcd", "cde", "def", "efg", "fgh", "ghi", "hij",
-		"ijk", "jkl", "klm", "lmn", "mno", "nop", "opq", "pqr", "qrs", "rst",
-		"stu", "tuv", "uvw", "vwx", "wxy", "xyz"}
-	if stringsNotEqual(Tokenize("abcdefghijklmnopqrstuvwxyz", 3), token) {
+	token = []string{"abc", "bcd", "cde"}
+	if stringsNotEqual(Tokenize([]string{"a", "b", "c", "d", "e"}, 3), token) {
 		t.Errorf("Failed to tokenize string by ngram 3.")
 	}
 }
 func ExampleTokenize() {
-	result := Tokenize("abcd", 2)
+	result := Tokenize([]string{"a", "b", "c", "d"}, 2)
 	fmt.Print(result)
 	// Output: [ab bc cd]
 }
