@@ -1,5 +1,5 @@
 /*
-  gofuzz is a collection of metrics and phonetic (fuzzy string matching)
+  GoFuzz is a collection of metrics and phonetic (fuzzy string matching)
   algorithms for Go.
 
   All of the phonetic functions are defined within the 'phon' subdirectory, and
