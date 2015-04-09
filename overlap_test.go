@@ -1,6 +1,7 @@
 package gofuzz
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -145,4 +146,12 @@ func TestOverlap(t *testing.T) {
 		t.Errorf("'context' and 'contact', ngram3 should equal 0.4, they "+
 			"equaled: %f.", s16)
 	}
+}
+func ExampleOverlap() {
+	result, err := Overlap("Chipotle", "Chipotle Mexican Grill", 2)
+	if err != nil {
+		fmt.Print("an unexpected error was encountered")
+	}
+	fmt.Print(result)
+	// Output: 1
 }

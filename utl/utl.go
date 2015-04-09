@@ -18,8 +18,7 @@ func DeDuplicate(s string) string {
 	lastCharIndex := 0
 	for _, char := range runes[1:] {
 		lastChar := newVal[lastCharIndex]
-		// 99 below is rune number representing the lowercase letter c
-		if char == 99 || char != lastChar {
+		if char == 'c' || char != lastChar {
 			lastCharIndex = lastCharIndex + 1
 			newVal[lastCharIndex] = char
 		}
@@ -36,24 +35,23 @@ func IsAlphabetic(s string) bool {
 	return !isAlphabetic
 }
 
-// Intersect finds the intersection of two char slices.
+// Intersect finds the intersection of two string slices.
 func Intersect(s1 []string, s2 []string) []string {
+	short := &s1
+	long := &s2
 	if len(s1) > len(s2) {
-		temp := s1
-		s1 = s2
-		s2 = temp
+		short = &s2
+		long = &s1
 	}
-	intersect := make([]string, len(s1))
+	intersect := make([]string, len(*short))
 	intersectIndex := 0
-	for _, char1 := range s1 {
-		for _, char2 := range s2 {
-			switch {
-			case char1 == char2 && intersectIndex == 0:
-				intersect[0] = char1
-				intersectIndex = intersectIndex + 1
-			case char1 == char2 && char1 != intersect[intersectIndex-1]:
+	for _, char1 := range *short {
+	Loop2:
+		for _, char2 := range *long {
+			if char1 == char2 {
 				intersect[intersectIndex] = char1
 				intersectIndex = intersectIndex + 1
+				break Loop2
 			}
 		}
 	}

@@ -109,7 +109,7 @@ func ExampleMinInt() {
 	// Output: 1
 }
 
-/* Helper Functions */
+/* Helper functions */
 
 func runesNotEqual(a []rune, b []rune) bool {
 	if len(a) != len(b) {

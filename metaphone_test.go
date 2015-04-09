@@ -667,7 +667,6 @@ func TestMetaphone(t *testing.T) {
 			"'anttsstblxmntrnsm' and got '%s'.", misc)
 	}
 }
-
 func ExampleMetaphone() {
 	result, err := Metaphone("Colorado")
 	if err != nil {
