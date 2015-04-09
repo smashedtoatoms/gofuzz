@@ -1,4 +1,4 @@
-package gofuzz
+package phon
 
 import (
 	"fmt"

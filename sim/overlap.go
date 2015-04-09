@@ -1,4 +1,4 @@
-package gofuzz
+package sim
 
 import (
 	"errors"
@@ -6,6 +6,9 @@ import (
 )
 
 // Overlap calculates the Overlap distance between two strings.
+//
+// Note: the ngramSize is the number of letters to clump together when doing
+// the comparison.  When in doubt, set it to 1.
 func Overlap(s1 string, s2 string, ngramSize int) (float32, error) {
 	c1 := []rune(s1)
 	c2 := []rune(s2)

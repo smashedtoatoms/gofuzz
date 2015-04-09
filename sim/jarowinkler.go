@@ -1,4 +1,4 @@
-package gofuzz
+package sim
 
 import (
 	"errors"

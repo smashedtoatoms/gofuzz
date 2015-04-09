@@ -1,4 +1,7 @@
-package gofuzz
+/*
+  Sim contains all of the functions for calculating similarity.
+*/
+package sim
 
 import (
 	"errors"

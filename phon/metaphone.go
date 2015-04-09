@@ -1,4 +1,7 @@
-package gofuzz
+/*
+  Phon contains all of the functions for doing phonetic comparisons.
+*/
+package phon
 
 import (
 	"errors"
