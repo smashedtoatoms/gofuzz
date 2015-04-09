@@ -51,7 +51,7 @@ func TestJaro(t *testing.T) {
 		t.Errorf("'aa' to 'a' failed with: %f.", s1)
 	}
 	s2, _ := Jaro("a", "aa")
-	if s1 > 0.8333334 || s1 < 0.8333332 {
+	if s2 > 0.8333334 || s2 < 0.8333332 {
 		t.Errorf("'a' to 'aa' failed with: %f.", s2)
 	}
 	s3, _ := Jaro("veryveryverylong", "v")
