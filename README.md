@@ -1,9 +1,9 @@
-gofuzz
+GoFuzz
 =======
 
 **Fuzzy string matching algorithm implementations**
 
-gofuzz is a collection of metrics and phonetic (fuzzy string matching) algorithms for Go.  It is based entirely on the [rockymadden stringmetric library](https://github.com/rockymadden/stringmetric) written by Rocky Madden for Scala.  There will eventually be implementations of all of the string metric and phonetic algorithms implemented in his library if I can find the time.  The library provides facilities to perform approximate string matching, measurement of string similarity/distance, indexing by word pronunciation, and sounds-like comparisons. The best way to see usage is to check out the tests and the [documentation](http://godoc.org/github.com/smashedtoatoms/gofuzz).
+GoFuzz is a collection of metrics and phonetic (fuzzy string matching) algorithms for Go.  It is based entirely on the [rockymadden stringmetric library](https://github.com/rockymadden/stringmetric) written by Rocky Madden for Scala.  There will eventually be implementations of all of the string metric and phonetic algorithms implemented in his library if I can find the time.  The library provides facilities to perform approximate string matching, measurement of string similarity/distance, indexing by word pronunciation, and sounds-like comparisons. The best way to see usage is to check out the tests and the [documentation](http://godoc.org/github.com/smashedtoatoms/gofuzz).
 
 The following algorithms are currently implemented.
 
