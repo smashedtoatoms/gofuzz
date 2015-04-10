@@ -28,10 +28,7 @@ func DeDuplicate(s string) string {
 
 // Determines if a string is alphabetic or not.
 func IsAlphabetic(s string) bool {
-	isAlphabetic, err := regexp.MatchString("[\\W0-9]", s)
-	if err != nil {
-		return false
-	}
+	isAlphabetic, _ := regexp.MatchString("[\\W0-9]", s)
 	return !isAlphabetic
 }
 

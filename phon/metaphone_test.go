@@ -666,6 +666,18 @@ func TestMetaphone(t *testing.T) {
 		t.Errorf("Metaphone 'antidisestablishmentarianism' expected "+
 			"'anttsstblxmntrnsm' and got '%s'.", misc)
 	}
+	misc, _ = Metaphone("xylophone")
+	if misc != "slfn" {
+		t.Errorf("Metaphone xylophone expected 'slfn' and got '%s'.", misc)
+	}
+	misc, _ = Metaphone("white")
+	if misc != "wt" {
+		t.Errorf("Metaphone xylophone expected 'wt' and got '%s'.", misc)
+	}
+	misc, _ = Metaphone("wuss")
+	if misc != "ws" {
+		t.Errorf("Metaphone xylophone expected 'ws' and got '%s'.", misc)
+	}
 }
 func ExampleMetaphone() {
 	result, err := Metaphone("Colorado")
@@ -674,4 +686,17 @@ func ExampleMetaphone() {
 	}
 	fmt.Print(result)
 	// Output: klrt
+}
+
+// Tests to get 100% test coverage.
+func TestTranscodeFirstCharacter(t *testing.T) {
+	if len(transcodeFirstCharacter("")) != 0 {
+		fmt.Errorf("transcodeFirstCharacter didn't return empty string.")
+	}
+}
+
+func TestTranscode(t *testing.T) {
+	if transcode([]rune("&")) != "&" {
+		fmt.Errorf("transcode didn't return the invalid value it was given.")
+	}
 }

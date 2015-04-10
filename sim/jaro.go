@@ -22,7 +22,6 @@ func Jaro(s1 string, s2 string) (float32, error) {
 	default:
 		return match(chars1, chars2), nil
 	}
-	return 0.0, nil
 }
 
 /* Helper functions */

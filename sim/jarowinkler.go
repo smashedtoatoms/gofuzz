@@ -16,19 +16,13 @@ func JaroWinkler(s1 string, s2 string) (float32, error) {
 		return 0.0, errors.New("Unable to calculate Jaro-Winkler against empty " +
 			"string.")
 	case s1 == s2:
-		return 1., nil
+		return 1.0, nil
 	case s1Size > s2Size:
-		jaroScore, err := Jaro(s2, s1)
-		if err != nil {
-			return 0.0, err
-		}
+		jaroScore, _ := Jaro(s2, s1)
 		modifiedPrefix := float32(modifyPrefix(chars2, chars1))
 		return jaroScore + ((modifiedPrefix * (1.0 - jaroScore)) / 10.0), nil
 	default:
-		jaroScore, err := Jaro(s1, s2)
-		if err != nil {
-			return 0.0, nil
-		}
+		jaroScore, _ := Jaro(s1, s2)
 		modifiedPrefix := float32(modifyPrefix(chars1, chars2))
 		return jaroScore + ((modifiedPrefix * (1.0 - jaroScore)) / 10.0), nil
 	}

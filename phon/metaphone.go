@@ -34,11 +34,8 @@ func MetaphoneMetric(val1 string, val2 string) (bool, error) {
 	s2IsAlphabetic := utl.IsAlphabetic(val2)
 	switch s1Size == 0 || !s1IsAlphabetic || s2Size == 0 || !s2IsAlphabetic {
 	case false:
-		phonetic1, err := Metaphone(val1)
-		phonetic2, err := Metaphone(val2)
-		if err != nil {
-			return false, err
-		}
+		phonetic1, _ := Metaphone(val1)
+		phonetic2, _ := Metaphone(val2)
 		return phonetic1 == phonetic2, nil
 	default:
 		return false, errors.New("Unable to Metaphone compare the two values.")
@@ -82,9 +79,6 @@ func transcode(characters []rune) string {
 	// that need to be processed.
 	rChar := func(n int) rune {
 		i := size - rSize() + n
-		if i >= size {
-			return rune(0)
-		}
 		return characters[i]
 	}
 
@@ -123,9 +117,6 @@ func transcode(characters []rune) string {
 			case rSize() >= 2 && rChar(0) == 'i' && rChar(1) == 'a':
 				shift(3, 'x')
 			case rSize() >= 1 && rChar(0) == 'h':
-				shift(2, 'x')
-			case pCount >= 1 && rSize() >= 1 && pChar(0) == 's' &&
-				rChar(0) == 'h':
 				shift(2, 'x')
 			case pCount >= 1 && rSize() >= 1 && pChar(0) == 's' &&
 				utl.Contains(iey, rChar(0)):

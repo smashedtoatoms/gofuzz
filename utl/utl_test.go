@@ -46,6 +46,16 @@ func ExampleIsAlphabetic_2() {
 	// Output: false
 }
 
+func TestIntersect(t *testing.T) {
+	characterList1 := []string{"c", "o", "n", "t", "e", "n", "t", "c", "o", "n",
+		"t", "e", "n", "t"}
+	characterList2 := []string{"c", "o", "n", "t", "e", "x", "t"}
+	result := Intersect(characterList1, characterList2)
+	if stringsNotEqual(result, []string{"c", "o", "n", "t", "e", "t"}) {
+		t.Errorf("Intersect unable to calculate intersection correctly.")
+	}
+}
+
 func ExampleIntersect() {
 	characterList1 := []string{"c", "o", "n", "t", "e", "x", "t"}
 	characterList2 := []string{"c", "o", "n", "t", "e", "n", "t", "c", "o", "n",
@@ -68,6 +78,10 @@ func TestTokenize(t *testing.T) {
 	if stringsNotEqual(Tokenize([]string{"a", "b", "c", "d", "e"}, 3), token) {
 		t.Errorf("Failed to tokenize string by ngram 3.")
 	}
+	token = make([]string, 0)
+	if stringsNotEqual(Tokenize(make([]string, 0), 3), token) {
+		t.Errorf("Failed to tokenize string by ngram 3.")
+	}
 }
 func ExampleTokenize() {
 	result := Tokenize([]string{"a", "b", "c", "d"}, 2)
@@ -75,6 +89,11 @@ func ExampleTokenize() {
 	// Output: [ab bc cd]
 }
 
+func TestContains(t *testing.T) {
+	if Contains([]rune("abc"), 'z') {
+		t.Errorf("Failed to not find 'z' in 'abc'.")
+	}
+}
 func ExampleContains() {
 	success := Contains([]rune("abc"), 'b')
 	fmt.Print(success)
