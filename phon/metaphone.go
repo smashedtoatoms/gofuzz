@@ -116,7 +116,8 @@ func transcode(characters []rune) string {
 				shift(1, 'k')
 			case rSize() >= 2 && rChar(0) == 'i' && rChar(1) == 'a':
 				shift(3, 'x')
-			case rSize() >= 1 && rChar(0) == 'h':
+			case (rSize() >= 1 && rChar(0) == 'h') ||
+				(pCount >= 1 && rSize() >= 1 && pChar(0) == 's' && rChar(0) == 'h'):
 				shift(2, 'x')
 			case pCount >= 1 && rSize() >= 1 && pChar(0) == 's' &&
 				utl.Contains(iey, rChar(0)):
