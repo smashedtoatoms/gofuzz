@@ -19,7 +19,7 @@ func DeDuplicate(s string) string {
 	for _, char := range runes[1:] {
 		lastChar := newVal[lastCharIndex]
 		if char == 'c' || char != lastChar {
-			lastCharIndex = lastCharIndex + 1
+			lastCharIndex += 1
 			newVal[lastCharIndex] = char
 		}
 	}
@@ -47,7 +47,7 @@ func Intersect(s1 []string, s2 []string) []string {
 		for _, char2 := range *long {
 			if char1 == char2 {
 				intersect[intersectIndex] = char1
-				intersectIndex = intersectIndex + 1
+				intersectIndex += 1
 				break Loop2
 			}
 		}
@@ -66,7 +66,7 @@ func Tokenize(s1 []string, n int) []string {
 		newString := ""
 		strings := s1[i : i+(n)]
 		for _, s := range strings {
-			newString = newString + s
+			newString += s
 		}
 		tokenized[i] = newString
 	}

@@ -42,18 +42,18 @@ func match(s1 []rune, s2 []rune) float32 {
 			char2 := s2[from]
 			switch {
 			case char1 == char2 && previous != -1 && from < previous:
-				commons = commons + 1
-				transpositions = transpositions + 1
+				commons += 1
+				transpositions += 1
 				previous = from
-				from = from + 1
+				from += 1
 				break SecondWordLoop
 			case char1 == char2:
 				previous = from
-				commons = commons + 1
-				from = from + 1
+				commons += 1
+				from += 1
 				break SecondWordLoop
 			default:
-				from = from + 1
+				from += 1
 			}
 		}
 	}

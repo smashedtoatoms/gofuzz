@@ -57,16 +57,16 @@ func transcode(characters []rune) string {
 	shift := func(count int, character rune) {
 		switch character {
 		case none:
-			pCount = pCount + count
+			pCount += count
 		case ks:
 			output[oCount] = 'k'
 			output[oCount+1] = 's'
-			oCount = oCount + 2
-			pCount = pCount + count
+			oCount += 2
+			pCount += count
 		default:
 			output[oCount] = character
-			oCount = oCount + 1
-			pCount = pCount + count
+			oCount += 1
+			pCount += count
 		}
 	}
 
